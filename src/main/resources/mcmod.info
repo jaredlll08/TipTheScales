@@ -1,0 +1,16 @@
+[
+{
+  "modid": "tipthescales",
+  "name": "TipTheScales",
+  "description": "Allows for more control when adjusting the GUI size.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Jared"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
