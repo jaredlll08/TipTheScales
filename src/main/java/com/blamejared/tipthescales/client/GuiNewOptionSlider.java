@@ -27,7 +27,7 @@ public class GuiNewOptionSlider extends GuiButton {
         this.minValue = minValueIn;
         this.maxValue = maxValue;
         Minecraft minecraft = Minecraft.getMinecraft();
-        this.sliderValue = MathHelper.clamp(minecraft.gameSettings.guiScale, minValueIn, maxValue);
+        this.sliderValue = MathHelper.clamp_int(minecraft.gameSettings.guiScale, minValueIn, maxValue);
         this.displayString = getDisplayString(minecraft);
     }
     
@@ -45,20 +45,20 @@ public class GuiNewOptionSlider extends GuiButton {
     protected void mouseDragged(Minecraft mc, int mouseX, int mouseY) {
         if(this.visible) {
             if(this.dragging) {
-                final float index = (mouseX - (this.x + 4)) / (float) (this.width - 10);
+                final float index = (mouseX - (this.xPosition + 4)) / (float) (this.width - 10);
                 sliderValue = Math.round(mc.gameSettings.guiScale > maxValue ? mc.gameSettings.guiScale * index : maxValue * index);
-                this.sliderValue = MathHelper.clamp(this.sliderValue, this.minValue, this.maxValue);
+                this.sliderValue = MathHelper.clamp_int(this.sliderValue, this.minValue, this.maxValue);
                 this.displayString = getDisplayString(mc);
             }
             
             mc.getTextureManager().bindTexture(BUTTON_TEXTURES);
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
             
-            int renderX = Math.round(this.x + (sliderValue * ((this.width) / maxValue)));
-            renderX = Math.max(this.x, renderX);
-            renderX = Math.min(this.x + width-8, renderX);
-            this.drawTexturedModalRect(renderX, this.y, 0, 66, 4, 20);
-            this.drawTexturedModalRect(renderX + 4, this.y, 196, 66, 4, 20);
+            int renderX = Math.round(this.xPosition + (sliderValue * ((this.width) / maxValue)));
+            renderX = Math.max(this.xPosition, renderX);
+            renderX = Math.min(this.xPosition + width-8, renderX);
+            this.drawTexturedModalRect(renderX, this.yPosition, 0, 66, 4, 20);
+            this.drawTexturedModalRect(renderX + 4, this.yPosition, 196, 66, 4, 20);
         }
     }
     

@@ -4,12 +4,12 @@ buildscript {
         maven { url = "http://files.minecraftforge.net/maven" }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
     }
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 
-version = "1.12.2-1.0.0"
+version = "1.10.2-1.0.0"
 group = "com.blamejared.tipthescales"
 archivesBaseName = "TipTheScales"
 
@@ -19,9 +19,9 @@ compileJava {
 }
 
 minecraft {
-    version = "1.12.2-14.23.0.2546"
+    version = "1.10.2-12.18.3.2511"
     runDir = "run"
-    mappings = "snapshot_20171003"
+    mappings = "snapshot_20161111"
 }
 
 dependencies {

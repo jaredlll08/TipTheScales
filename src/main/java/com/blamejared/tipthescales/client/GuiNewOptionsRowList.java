@@ -23,7 +23,7 @@ public class GuiNewOptionsRowList extends GuiOptionsRowList {
                 ++max;
             }
             
-            return new GuiNewOptionSlider(options.getOrdinal(), p_148182_2_, p_148182_3_, options, 0, max - 1);
+            return new GuiNewOptionSlider(options.returnEnumOrdinal(), p_148182_2_, p_148182_3_, options, 0, max - 1);
         } else {
             return super.createButton(mc, p_148182_2_, p_148182_3_, options);
         }
