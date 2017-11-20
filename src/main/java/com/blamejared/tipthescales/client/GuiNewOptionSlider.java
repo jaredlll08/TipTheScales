@@ -1,13 +1,12 @@
 package com.blamejared.tipthescales.client;
 
+import cpw.mods.fml.relauncher.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
-import net.minecraft.util.math.MathHelper;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.util.MathHelper;
+import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class GuiNewOptionSlider extends GuiButton {
@@ -35,7 +34,7 @@ public class GuiNewOptionSlider extends GuiButton {
      * Returns 0 if the button is disabled, 1 if the mouse is NOT hovering over this button and 2 if it IS hovering over
      * this button.
      */
-    protected int getHoverState(boolean mouseOver) {
+    public int getHoverState(boolean mouseOver) {
         return 0;
     }
     
@@ -51,8 +50,8 @@ public class GuiNewOptionSlider extends GuiButton {
                 this.displayString = getDisplayString(mc);
             }
             
-            mc.getTextureManager().bindTexture(BUTTON_TEXTURES);
-            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+            mc.getTextureManager().bindTexture(buttonTextures);
+            GL11.glColor4f(1,1,1,1);
             
             int renderX = Math.round(this.xPosition + (sliderValue * ((this.width) / maxValue)));
             renderX = Math.max(this.xPosition, renderX);

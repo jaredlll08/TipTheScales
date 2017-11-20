@@ -2,10 +2,10 @@ package com.blamejared.tipthescales;
 
 import com.blamejared.tipthescales.proxy.CommonProxy;
 import com.blamejared.tipthescales.reference.Reference;
-import net.minecraftforge.fml.common.*;
-import net.minecraftforge.fml.common.event.*;
+import cpw.mods.fml.common.*;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION, clientSideOnly = true)
+@Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
 public class TipTheScales {
     
     

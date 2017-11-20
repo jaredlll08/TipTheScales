@@ -1,11 +1,10 @@
 package com.blamejared.tipthescales.client;
 
+import cpw.mods.fml.relauncher.*;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiNewVideoSettings extends GuiVideoSettings {
@@ -23,14 +22,14 @@ public class GuiNewVideoSettings extends GuiVideoSettings {
         this.buttonList.clear();
         this.buttonList.add(new GuiButton(200, this.width / 2 - 100, this.height - 27, I18n.format("gui.done")));
         
-        if(OpenGlHelper.vboSupported) {
-            this.optionsRowList = new GuiNewOptionsRowList(this.mc, this.width, this.height, 32, this.height - 32, 25, VIDEO_OPTIONS);
+        if(OpenGlHelper.field_153197_d) {
+            this.optionsRowList = new GuiNewOptionsRowList(this.mc, this.width, this.height, 32, this.height - 32, 25, videoOptions);
         } else {
-            GameSettings.Options[] agamesettings$options = new GameSettings.Options[VIDEO_OPTIONS.length - 1];
+            GameSettings.Options[] agamesettings$options = new GameSettings.Options[videoOptions.length - 1];
             int i = 0;
             
-            for(GameSettings.Options gamesettings$options : VIDEO_OPTIONS) {
-                if(gamesettings$options == GameSettings.Options.USE_VBO) {
+            for(GameSettings.Options gamesettings$options : videoOptions) {
+                if(gamesettings$options == GameSettings.Options.ADVANCED_OPENGL) {
                     break;
                 }
                 
