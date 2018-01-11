@@ -2,6 +2,7 @@ package com.blamejared.tipthescales;
 
 import com.blamejared.tipthescales.proxy.CommonProxy;
 import com.blamejared.tipthescales.reference.Reference;
+import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.*;
 import net.minecraftforge.fml.common.event.*;
 
@@ -17,7 +18,12 @@ public class TipTheScales {
     
     @Mod.EventHandler
     public void onFMLPreInitialization(FMLPreInitializationEvent event) {
-        PROXY.registerEvents();
+        if(!FMLClientHandler.instance().hasOptifine()) {
+            PROXY.registerEvents();
+        } else {
+            FMLLog.bigWarning("OPTIFINE DETECTED! DISABLING TIPTHESCALES!!!");
+        }
+        
     }
     
 }
