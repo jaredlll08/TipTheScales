@@ -22,11 +22,13 @@ public class GuiNewOptionsRowList extends GuiOptionsRowList {
             while(max < j && mc.displayWidth / (max + 1) >= 320 && mc.displayHeight / (max + 1) >= 240) {
                 ++max;
             }
-            
-            if(max !=1){
-                max -=1;
+    
+            if (mc.isUnicode() && max % 2 != 0 && max != 1)
+            {
+                --max;
             }
-            return new GuiNewOptionSlider(options.getOrdinal(), p_148182_2_, p_148182_3_, options, 0, max);
+            
+            return new GuiNewOptionSlider(options.getOrdinal(), p_148182_2_, p_148182_3_, options, 0, max-1);
         } else {
             return super.createButton(mc, p_148182_2_, p_148182_3_, options);
         }
