@@ -1,15 +1,14 @@
 package com.blamejared.tipthescales.client;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.*;
+
+import net.minecraft.client.*;
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.client.settings.GameSettings;
 import net.minecraft.util.math.MathHelper;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.*;
 
-@SideOnly(Side.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class GuiNewOptionSlider extends GuiButton {
     
     public static final String[] GUISCALES = new String[]{"options.guiScale.auto", "options.guiScale.small", "options.guiScale.normal", "options.guiScale.large"};
@@ -26,7 +25,7 @@ public class GuiNewOptionSlider extends GuiButton {
         this.options = optionIn;
         this.minValue = minValueIn;
         this.maxValue = maxValue;
-        Minecraft minecraft = Minecraft.getMinecraft();
+        Minecraft minecraft = Minecraft.getInstance();
         this.sliderValue = MathHelper.clamp(minecraft.gameSettings.guiScale, minValueIn, maxValue);
         this.displayString = getDisplayString(minecraft);
     }
@@ -52,11 +51,11 @@ public class GuiNewOptionSlider extends GuiButton {
             }
             
             mc.getTextureManager().bindTexture(BUTTON_TEXTURES);
-            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+            GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
             
             int renderX = Math.round(this.x + (sliderValue * ((this.width) / maxValue)));
             renderX = Math.max(this.x, renderX);
-            renderX = Math.min(this.x + width-8, renderX);
+            renderX = Math.min(this.x + width - 8, renderX);
             this.drawTexturedModalRect(renderX, this.y, 0, 66, 4, 20);
             this.drawTexturedModalRect(renderX + 4, this.y, 196, 66, 4, 20);
         }
@@ -83,25 +82,15 @@ public class GuiNewOptionSlider extends GuiButton {
         return I18n.format(strArray[index]);
     }
     
-    /**
-     * Returns true if the mouse has been pressed on this control. Equivalent of MouseListener.mousePressed(MouseEvent
-     * e).
-     */
-    public boolean mousePressed(Minecraft mc, int mouseX, int mouseY) {
-        if(super.mousePressed(mc, mouseX, mouseY)) {
-            this.dragging = true;
-            return true;
-        } else {
-            return false;
-        }
+    @Override
+    public void onClick(double mouseX, double mouseY) {
+        super.onClick(mouseX, mouseY);
+        this.dragging = true;
     }
     
-    /**
-     * Fired when the mouse button is released. Equivalent of MouseListener.mouseReleased(MouseEvent e).
-     */
-    public void mouseReleased(int mouseX, int mouseY) {
-        this.dragging = false;
-        Minecraft.getMinecraft().gameSettings.guiScale = this.sliderValue;
+    @Override
+    public void onRelease(double mouseX, double mouseY) {
+        super.onRelease(mouseX, mouseY);
+        Minecraft.getInstance().gameSettings.guiScale = this.sliderValue;
     }
-    
 }
