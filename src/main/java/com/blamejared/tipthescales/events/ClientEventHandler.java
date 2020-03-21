@@ -1,10 +1,10 @@
 package com.blamejared.tipthescales.events;
 
-import com.blamejared.tipthescales.client.GuiNewVideoSettings;
-import net.minecraft.client.gui.*;
+import com.blamejared.tipthescales.client.FancyVideoSettingsScreen;
+import net.minecraft.client.gui.screen.*;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class ClientEventHandler {
     
@@ -14,9 +14,12 @@ public class ClientEventHandler {
     
     @SubscribeEvent
     public void onGuiOpen(GuiOpenEvent event) {
-        GuiScreen gui = event.getGui();
-        if(gui instanceof GuiVideoSettings && !(gui instanceof GuiNewVideoSettings)){
-            event.setGui(new GuiNewVideoSettings(((GuiVideoSettings) gui).parentGuiScreen, ((GuiVideoSettings) gui).guiGameSettings));
+        Screen gui = event.getGui();
+        if(gui instanceof VideoSettingsScreen && !(gui instanceof FancyVideoSettingsScreen)) {
+            event.setGui(new FancyVideoSettingsScreen(((VideoSettingsScreen) gui).parentScreen, ((VideoSettingsScreen) gui).gameSettings));
         }
+        //        if(gui instanceof VideoSettingsScreen && !(gui instanceof GuiNewVideoSettings)){
+        //            event.setGui(new GuiNewVideoSettings(((VideoSettingsScreen) gui).parentGuiScreen, ((VideoSettingsScreen) gui).guiGameSettings));
+        //        }
     }
 }

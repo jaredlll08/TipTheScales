@@ -1,29 +1,21 @@
 package com.blamejared.tipthescales;
 
-import com.blamejared.tipthescales.proxy.CommonProxy;
-import com.blamejared.tipthescales.reference.Reference;
-import net.minecraftforge.fml.client.FMLClientHandler;
+import com.blamejared.tipthescales.events.ClientEventHandler;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.*;
-import net.minecraftforge.fml.common.event.*;
+import net.minecraftforge.fml.event.lifecycle.*;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
-@Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION, clientSideOnly = true)
+@Mod("tipthescales")
 public class TipTheScales {
     
+    public TipTheScales() {
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
+    }
     
-    @Mod.Instance(Reference.MODID)
-    public static TipTheScales INSTANCE;
     
-    @SidedProxy(clientSide = "com.blamejared.tipthescales.proxy.ClientProxy", serverSide = "com.blamejared.tipthescales.proxy.CommonProxy")
-    public static CommonProxy PROXY;
-    
-    @Mod.EventHandler
-    public void onFMLPreInitialization(FMLPreInitializationEvent event) {
-        if(!FMLClientHandler.instance().hasOptifine()) {
-            PROXY.registerEvents();
-        } else {
-            FMLLog.bigWarning("OPTIFINE DETECTED! DISABLING TIPTHESCALES!!!");
-        }
-        
+    private void doClientStuff(final FMLClientSetupEvent event) {
+        MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
     }
     
 }
