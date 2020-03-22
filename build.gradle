@@ -12,7 +12,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.15.2-2.0.0'
+version = '1.15.2-2.0.1'
 group = "com.blamejared.tipthescales"
 archivesBaseName = "TipTheScales"
 
@@ -21,7 +21,7 @@ sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = co
 minecraft {
     mappings channel: 'snapshot', version: '20200225-1.15.1'
 
-     accessTransformer = file('src/main/resources/META-INF/tipthescales_at.cfg')
+     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
     runs {
         client {

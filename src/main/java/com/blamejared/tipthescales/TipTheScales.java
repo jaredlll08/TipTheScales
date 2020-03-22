@@ -13,7 +13,6 @@ public class TipTheScales {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
     }
     
-    
     private void doClientStuff(final FMLClientSetupEvent event) {
         MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
     }

@@ -18,8 +18,5 @@ public class ClientEventHandler {
         if(gui instanceof VideoSettingsScreen && !(gui instanceof FancyVideoSettingsScreen)) {
             event.setGui(new FancyVideoSettingsScreen(((VideoSettingsScreen) gui).parentScreen, ((VideoSettingsScreen) gui).gameSettings));
         }
-        //        if(gui instanceof VideoSettingsScreen && !(gui instanceof GuiNewVideoSettings)){
-        //            event.setGui(new GuiNewVideoSettings(((VideoSettingsScreen) gui).parentGuiScreen, ((VideoSettingsScreen) gui).guiGameSettings));
-        //        }
     }
 }
