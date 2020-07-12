@@ -5,6 +5,7 @@ modId="tipthescales" #mandatory
 version="${file.jarVersion}" #mandatory
 displayName="TipTheScales" #mandatory
 authors="Jaredlll08"
+updateJSONURL="https://updates.blamejared.com/get?n=TipTheScales&gv=1.15.2"
 description='''
 Allows for more control when adjusting the GUI size.
 '''
