@@ -1,11 +1,11 @@
 modLoader="javafml" #mandatory
-loaderVersion="[31,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+loaderVersion="[32,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
 [[mods]] #mandatory
 modId="tipthescales" #mandatory
 version="${file.jarVersion}" #mandatory
 displayName="TipTheScales" #mandatory
 authors="Jaredlll08"
-updateJSONURL="https://updates.blamejared.com/get?n=TipTheScales&gv=1.15.2"
+updateJSONURL="https://updates.blamejared.com/get?n=TipTheScales&gv=1.16.1"
 description='''
 Allows for more control when adjusting the GUI size.
 '''
