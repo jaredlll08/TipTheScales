@@ -3,8 +3,9 @@ package com.blamejared.tipthescales.client;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.settings.GameSettings;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.*;
+
+import java.awt.*;
 
 @SideOnly(Side.CLIENT)
 public class GuiNewOptionsRowList extends GuiOptionsRowList {
@@ -18,17 +19,18 @@ public class GuiNewOptionsRowList extends GuiOptionsRowList {
         if(options == GameSettings.Options.GUI_SCALE) {
             int j = 1000;
             int max = 1;
+            int width = Toolkit.getDefaultToolkit().getScreenSize().width;
+            int height = Toolkit.getDefaultToolkit().getScreenSize().height;
             
-            while(max < j && mc.displayWidth / (max + 1) >= 320 && mc.displayHeight / (max + 1) >= 240) {
+            while(max < j && width / (max + 1) >= 160 && height / (max + 1) >= 120) {
                 ++max;
             }
-    
-            if (mc.isUnicode() && max % 2 != 0 && max != 1)
-            {
+            
+            if(mc.isUnicode() && max % 2 != 0 && max != 1) {
                 --max;
             }
             
-            return new GuiNewOptionSlider(options.getOrdinal(), p_148182_2_, p_148182_3_, options, 0, max-1);
+            return new GuiNewOptionSlider(options.getOrdinal(), p_148182_2_, p_148182_3_, options, 0, max - 1);
         } else {
             return super.createButton(mc, p_148182_2_, p_148182_3_, options);
         }
