@@ -27,7 +27,7 @@ if (System.getenv('BUILD_NUMBER') != null) {
     version += "." + System.getenv('BUILD_NUMBER')
 }
 group = "com.blamejared.tipthescales"
-archivesBaseName = "TipTheScales-1.16.2"
+archivesBaseName = "TipTheScales-1.16.3"
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 repositories {
@@ -36,7 +36,7 @@ repositories {
     }
 }
 minecraft {
-    mappings channel: 'snapshot', version: '20200712-1.16.1'
+    mappings channel: 'snapshot', version: '20200820-1.16.1'
 
      accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
@@ -102,7 +102,7 @@ task genGitChangelog() {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.16.2-33.0.7'
+    minecraft 'net.minecraftforge:forge:1.16.3-34.0.5'
 
 }
 
@@ -216,7 +216,7 @@ task updateVersionTracker {
         def body = [
                 'author'        : "${project.findProperty('versionTrackerAuthor')}",
                 'projectName'   : "TipTheScales",
-                'gameVersion'   : "1.16.2",
+                'gameVersion'   : "1.16.3",
                 'projectVersion': "${version}",
                 'homepage'      : "${project.findProperty('versionTrackerHomepage')}",
                 'uid'           : "${project.findProperty('versionTrackerKey')}"

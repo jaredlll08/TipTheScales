@@ -19,7 +19,7 @@ public class FancyVideoSettingsScreen extends VideoSettingsScreen {
     @Override
     protected void init() {
         super.init();
-        this.optionsRowList.children().clear();
+        this.optionsRowList.getEventListeners().clear();
         this.optionsRowList.addOption(new FullscreenResolutionOption(this.minecraft.getMainWindow()));
         this.optionsRowList.addOption(AbstractOption.BIOME_BLEND_RADIUS);
         for(int i = 0; i < OPTIONS.length; i++) {
@@ -53,9 +53,9 @@ public class FancyVideoSettingsScreen extends VideoSettingsScreen {
     }
     
     public boolean superMouseClicked(double p_mouseClicked_1_, double p_mouseClicked_3_, int p_mouseClicked_5_) {
-        for(IGuiEventListener iguieventlistener : this.children()) {
+        for(IGuiEventListener iguieventlistener : this.getEventListeners()) {
             if(iguieventlistener.mouseClicked(p_mouseClicked_1_, p_mouseClicked_3_, p_mouseClicked_5_)) {
-                this.setFocused(iguieventlistener);
+                this.setListener(iguieventlistener);
                 if(p_mouseClicked_5_ == 0) {
                     this.setDragging(true);
                 }
