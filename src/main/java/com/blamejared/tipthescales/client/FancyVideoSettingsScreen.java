@@ -34,6 +34,7 @@ public class FancyVideoSettingsScreen extends VideoSettingsScreen {
         this.children.add(this.optionsRowList);
     }
     
+    @Override
     public boolean mouseClicked(double p_mouseClicked_1_, double p_mouseClicked_3_, int p_mouseClicked_5_) {
         guiScale = this.gameSettings.guiScale;
         return superMouseClicked(p_mouseClicked_1_, p_mouseClicked_3_, p_mouseClicked_5_);
