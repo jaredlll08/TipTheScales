@@ -11,11 +11,24 @@ buildscript {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
     }
 }
+plugins {
+    id "com.matthewprenger.cursegradle" version "1.4.0"
+}
 apply plugin: 'forge'
+apply plugin: 'maven-publish'
+apply from: 'https://raw.githubusercontent.com/MinecraftModDevelopment/Gradle-Collection/22e7d543a18cd30675277fbfa3669e3d9e206010/generic/secrets.gradle'
 
-version = "1.7.10-1.0.1"
+if (project.hasProperty('secretFile')) {
+    loadSecrets(new File((String) findProperty('secretFile')))
+}
+
+version = '3.0.0'
+if (System.getenv('BUILD_NUMBER') != null) {
+    version += "." + System.getenv('BUILD_NUMBER')
+}
+
 group = "com.blamejared.tipthescales"
-archivesBaseName = "TipTheScales"
+archivesBaseName = "TipTheScales-1.7.10"
 
 sourceCompatibility = targetCompatibility = '1.8'
 compileJava {
@@ -27,14 +40,41 @@ minecraft {
     runDir = "run"
 }
 
+task genGitChangelog() {
+    def stdout = new ByteArrayOutputStream()
+    // first commit to check from, in our case the first commit of the branch
+    String firstCommit = "dbdf6706efd531b43e71e913ecb468694db03220";
+    String repoLink = "https://github.com/jaredlll08/TipTheScales/commit/"
+    // was having issues with grep and spaces in the regex
+    exec {
+        commandLine 'git', 'log', '-i', '--grep=version\\spush', '--pretty=tformat:%H', '--date=local', firstCommit + '..@{0}'
+        standardOutput = stdout
+    }
+    if (stdout.toString().trim().indexOf("\n") >= 0) {
+        firstCommit = stdout.toString().split("\n")[0].trim();
+    }
+    System.out.println("Last version hash: \"" + firstCommit + "\"");
+    stdout = new ByteArrayOutputStream()
+    def test = exec {
+        commandLine 'git', 'log', '--pretty=tformat:- [%s](' + repoLink + '%H) - %aN - %cd', '--max-parents=1', '--date=local', firstCommit + "..@"
+        standardOutput = stdout
+    }
+    File file = new File("changelog.md")
+    file.write("### Current version: " + project.version)
+    file.append("\n" + stdout.toString())
+    System.out.println("Changelog generated!")
+}
+
 dependencies {
 
 }
+
 jar {
     manifest {
         attributes 'FMLAT': 'tipthescales_at.cfg'
     }
 }
+
 processResources {
     inputs.property "version", project.version
     inputs.property "mcversion", project.minecraft.version
@@ -47,5 +87,107 @@ processResources {
         
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
+    }
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    description = 'Creates a JAR containing the source code.'
+    from sourceSets.main.allSource
+    classifier = 'sources'
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    description = 'Creates a JAR containing the JavaDocs.'
+    from javadoc.destinationDir
+    classifier = 'javadoc'
+}
+
+task deobfJar(type: Jar) {
+    description = 'Creates a JAR containing the non-obfuscated compiled code.'
+    from sourceSets.main.output
+    classifier = "deobf"
+}
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+    archives deobfJar
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId project.group
+            artifactId project.archivesBaseName
+            version project.version
+            from components.java
+
+            // Allows the maven pom file to be modified.
+            pom.withXml {
+                // Go through all the dependencies.
+                asNode().dependencies.dependency.each { dep ->
+                    println 'Surpressing artifact ' + dep.artifactId.last().value().last() + ' from maven dependencies.'
+                    assert dep.parent().remove(dep)
+                }
+            }
+
+            artifact sourcesJar {
+                classifier 'sources'
+            }
+            artifact javadocJar {
+                classifier 'javadoc'
+            }
+            artifact deobfJar {
+                classifier 'deobf'
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            url "file://" + System.getenv("local_maven")
+        }
+    }
+}
+
+curseforge {
+    apiKey = findProperty('curseforge_api_token') ?: 0
+    project {
+        id = "282313"
+        releaseType = 'release'
+        changelog = file("changelog.md")
+        changelogType = 'markdown'
+
+//        addArtifact(sourcesJar)
+//        addArtifact(javadocJar)
+        addArtifact(deobfJar)
+    }
+}
+
+task updateVersionTracker {
+    onlyIf {
+        project.hasProperty('versionTrackerAPI')
+    }
+
+    doLast {
+        def body = [
+                'author'        : "${project.findProperty('versionTrackerAuthor')}",
+                'projectName'   : "TipTheScales",
+                'gameVersion'   : "1.7.10",
+                'projectVersion': "${version}",
+                'homepage'      : "${project.findProperty('versionTrackerHomepage')}",
+                'uid'           : "${project.findProperty('versionTrackerKey')}"
+        ]
+
+        // Opens a connection to the version tracker API and writes the payload JSON.
+        def req = new URL(project.findProperty('versionTrackerAPI')).openConnection()
+        req.setRequestMethod('POST')
+        req.setRequestProperty('Content-Type', 'application/json; charset=UTF-8')
+        req.setRequestProperty('User-Agent', "TipTheScales Tracker Gradle")
+        req.setDoOutput(true)
+        req.getOutputStream().write(JsonOutput.toJson(body).getBytes("UTF-8"))
+
+        // We need to attempt a read in order to actually send the message.
+        println "VersionCheck Status code: ${req.getResponseCode()}"
+        println "VersionCheck Response: ${req.getInputStream().getText()}"
     }
 }
