@@ -54,3 +54,5 @@
 /.nb-gradle/private/
 /common
 
+secrets.json
+changelog.md

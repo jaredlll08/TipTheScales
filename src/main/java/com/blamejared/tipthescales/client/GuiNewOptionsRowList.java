@@ -22,7 +22,10 @@ public class GuiNewOptionsRowList extends GuiOptionsRowList {
                 ++max;
             }
             
-            return new GuiNewOptionSlider(options.returnEnumOrdinal(), p_148182_2_, p_148182_3_, options, 0, max - 1);
+            if (max != 1)
+                max--;
+            
+            return new GuiNewOptionSlider(options.returnEnumOrdinal(), p_148182_2_, p_148182_3_, options, 0, max);
         } else {
             return super.func_148182_a(mcIn, p_148182_2_, p_148182_3_, options);
         }
