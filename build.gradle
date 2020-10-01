@@ -36,14 +36,14 @@ repositories {
     }
 }
 minecraft {
-    mappings channel: 'snapshot', version: '20200820-1.16.1'
+    mappings channel: 'snapshot', version: '20200916-1.16.2'
 
      accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
     runs {
         client {
             workingDirectory project.file('run')
-
+            taskName 'TipTheScalesClient'
             mods {
                 examplemod {
                     source sourceSets.main
@@ -53,8 +53,7 @@ minecraft {
 
         server {
             workingDirectory project.file('run')
-
-
+            taskName 'TipTheScalesServer'
             mods {
                 examplemod {
                     source sourceSets.main
@@ -64,7 +63,7 @@ minecraft {
 
         data {
             workingDirectory project.file('run')
-
+            taskName 'TipTheScalesData'
             args '--mod', 'examplemod', '--all', '--output', file('src/generated/resources/')
 
             mods {
