@@ -36,6 +36,7 @@
 /bin
 /eclipse/*
 /.metadata
+*.launch
 
 # IntelliJ IDEA
 /*.iml
