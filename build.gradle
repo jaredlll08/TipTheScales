@@ -43,7 +43,7 @@ minecraft {
     runs {
         client {
             workingDirectory project.file('run')
-
+            taskName 'TipTheScalesClient'
             mods {
                 examplemod {
                     source sourceSets.main
@@ -53,8 +53,7 @@ minecraft {
 
         server {
             workingDirectory project.file('run')
-
-
+            taskName 'TipTheScalesServer'
             mods {
                 examplemod {
                     source sourceSets.main
@@ -64,7 +63,7 @@ minecraft {
 
         data {
             workingDirectory project.file('run')
-
+            taskName 'TipTheScalesData'
             args '--mod', 'examplemod', '--all', '--output', file('src/generated/resources/')
 
             mods {
