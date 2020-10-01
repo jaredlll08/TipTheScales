@@ -22,10 +22,10 @@ public class FancyVideoSettingsScreen extends VideoSettingsScreen {
         this.optionsRowList.addOption(AbstractOption.BIOME_BLEND_RADIUS);
         for(int i = 0; i < OPTIONS.length; i++) {
             AbstractOption option = OPTIONS[i];
-            if(option.field_243217_ac.getString().equals(AbstractOption.GUI_SCALE.field_243217_ac.getString()) && !(option instanceof SliderPercentageOption)) {
+            if(option.translatedBaseMessage.getString().equals(AbstractOption.GUI_SCALE.translatedBaseMessage.getString()) && !(option instanceof SliderPercentageOption)) {
                 OPTIONS[i] = new SliderPercentageOption("options.guiScale", 0, Minecraft.getInstance().getMainWindow().calcGuiScale(0, Minecraft.getInstance().getForceUnicodeFont()), 1, gameSettings1 -> (double) gameSettings1.guiScale, (gameSettings1, aDouble) -> {
                     gameSettings1.guiScale = (int) Math.round(aDouble);
-                }, (gameSettings1, sliderPercentageOption) -> sliderPercentageOption.func_243222_a(gameSettings1.guiScale == 0 ? new TranslationTextComponent("options.guiScale.auto") : new StringTextComponent(gameSettings1.guiScale + "")));
+                }, (gameSettings1, sliderPercentageOption) -> sliderPercentageOption.getGenericValueComponent(gameSettings1.guiScale == 0 ? new TranslationTextComponent("options.guiScale.auto") : new StringTextComponent(gameSettings1.guiScale + "")));
             }
         }
         this.optionsRowList.addOptions(OPTIONS);
