@@ -1,10 +1,10 @@
-modLoader="javafml" #mandatory
-loaderVersion="[34,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+modLoader="javafml"
+loaderVersion="[34,)"
 license="MIT"
-[[mods]] #mandatory
-modId="tipthescales" #mandatory
-version="${file.jarVersion}" #mandatory
-displayName="TipTheScales" #mandatory
+[[mods]]
+modId="tipthescales"
+version="${file.jarVersion}"
+displayName="TipTheScales"
 authors="Jaredlll08"
 updateJSONURL="https://updates.blamejared.com/get?n=TipTheScales&gv=1.16.3"
 description='''
