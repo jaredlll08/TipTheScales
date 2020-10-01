@@ -1,9 +1,10 @@
 package com.blamejared.tipthescales.client;
 
-import cpw.mods.fml.relauncher.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.settings.GameSettings;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiNewOptionsRowList extends GuiOptionsRowList {
