@@ -6,8 +6,6 @@ import net.minecraft.client.gui.screen.*;
 import net.minecraft.client.settings.SliderPercentageOption;
 import net.minecraft.util.text.*;
 
-import java.util.ArrayList;
-
 public class FancyVideoSettingsScreen extends VideoSettingsScreen {
     
     public FancyVideoSettingsScreen(Screen p_i1062_1_, GameSettings p_i1062_2_) {
