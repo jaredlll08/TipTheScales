@@ -1,15 +1,28 @@
 package com.blamejared.tipthescales.client;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 import net.minecraft.client.*;
 import net.minecraft.client.gui.IGuiEventListener;
 import net.minecraft.client.gui.screen.*;
+import net.minecraft.client.renderer.GPUWarning;
+import net.minecraft.client.settings.GraphicsFanciness;
 import net.minecraft.client.settings.SliderPercentageOption;
 import net.minecraft.util.text.*;
 
+import java.util.List;
+
 public class FancyVideoSettingsScreen extends VideoSettingsScreen {
+    
+    private final GPUWarning gpuWarning;
     
     public FancyVideoSettingsScreen(Screen screen, GameSettings settings) {
         super(screen, settings);
+        this.gpuWarning = Minecraft.getInstance().getGPUWarning();
+        this.gpuWarning.func_241702_i_();
+        if(settings.graphicFanciness == GraphicsFanciness.FABULOUS) {
+            this.gpuWarning.func_241698_e_();
+        }
     }
     
     public static int guiScale;
@@ -35,7 +48,42 @@ public class FancyVideoSettingsScreen extends VideoSettingsScreen {
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int buttonId) {
         guiScale = this.gameSettings.guiScale;
-        return superMouseClicked(mouseX, mouseY, buttonId);
+        if(superMouseClicked(mouseX, mouseY, buttonId)) {
+            if(this.gpuWarning.func_241700_g_()) {
+                List<ITextProperties> list = Lists.newArrayList(field_241599_p_, field_241603_t_);
+                String s = this.gpuWarning.func_241703_j_();
+                if(s != null) {
+                    list.add(field_241603_t_);
+                    list.add((new TranslationTextComponent("options.graphics.warning.renderer", s)).mergeStyle(TextFormatting.GRAY));
+                }
+                
+                String s1 = this.gpuWarning.func_241705_l_();
+                if(s1 != null) {
+                    list.add(field_241603_t_);
+                    list.add((new TranslationTextComponent("options.graphics.warning.vendor", s1)).mergeStyle(TextFormatting.GRAY));
+                }
+                
+                String s2 = this.gpuWarning.func_241704_k_();
+                if(s2 != null) {
+                    list.add(field_241603_t_);
+                    list.add((new TranslationTextComponent("options.graphics.warning.version", s2)).mergeStyle(TextFormatting.GRAY));
+                }
+                
+                this.minecraft.displayGuiScreen(new GPUWarningScreen(field_241600_q_, list, ImmutableList.of(new GPUWarningScreen.Option(field_241601_r_, (p_241606_1_) -> {
+                    this.gameSettings.graphicFanciness = GraphicsFanciness.FABULOUS;
+                    Minecraft.getInstance().worldRenderer.loadRenderers();
+                    this.gpuWarning.func_241698_e_();
+                    this.minecraft.displayGuiScreen(this);
+                }), new GPUWarningScreen.Option(field_241602_s_, (p_241605_1_) -> {
+                    this.gpuWarning.func_241699_f_();
+                    this.minecraft.displayGuiScreen(this);
+                }))));
+            }
+            
+            return true;
+        } else {
+            return false;
+        }
     }
     
     @Override
