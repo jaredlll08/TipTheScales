@@ -1,44 +1,32 @@
 buildscript {
     repositories {
         maven { url = 'https://files.minecraftforge.net/maven' }
-        jcenter()
+        maven { url = 'https://maven.blamejared.com' }
         mavenCentral()
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
+        classpath group: 'com.blamejared', name: 'ModTemplate', version: '1.+', changing: true
     }
 }
 plugins {
     id "com.matthewprenger.cursegradle" version "1.4.0"
 }
 apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'com.blamejared.modtemplate'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
-apply from: 'https://raw.githubusercontent.com/MinecraftModDevelopment/Gradle-Collection/22e7d543a18cd30675277fbfa3669e3d9e206010/generic/secrets.gradle'
-
-import groovy.json.JsonOutput
-
-if (project.hasProperty('secretFile')) {
-    loadSecrets(new File((String) findProperty('secretFile')))
-}
 
 version = '3.0.0'
-if (System.getenv('BUILD_NUMBER') != null) {
-    version += "." + System.getenv('BUILD_NUMBER')
-}
 group = "com.blamejared.tipthescales"
 archivesBaseName = "TipTheScales-1.16.5"
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
-repositories {
-    maven {
-        url 'https://dogforce-games.com/maven'
-    }
-}
+
 minecraft {
     mappings channel: 'snapshot', version: '20201028-1.16.3'
 
-     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
     runs {
         client {
@@ -75,34 +63,31 @@ minecraft {
     }
 }
 
-task genGitChangelog() {
-    def stdout = new ByteArrayOutputStream()
-    // first commit to check from, in our case the first commit of the branch
-    String firstCommit = "3e4ed4eb6f5a9b288bb52bcd5bfcffb408910007";
-    String repoLink = "https://github.com/jaredlll08/TipTheScales/commit/"
-    // was having issues with grep and spaces in the regex
-    exec {
-        commandLine 'git', 'log', '-i', '--grep=version\\spush', '--pretty=tformat:%H', '--date=local', firstCommit + '..@{0}'
-        standardOutput = stdout
+modTemplate {
+    mcVersion "1.16.5"
+    curseHomepage "https://www.curseforge.com/minecraft/mc-mods/tipthescales"
+    displayName "TipTheScales"
+
+    changelog {
+        enabled true
+        firstCommit "3e4ed4eb6f5a9b288bb52bcd5bfcffb408910007"
+        repo "https://github.com/jaredlll08/TipTheScales"
     }
-    if (stdout.toString().trim().indexOf("\n") >= 0) {
-        firstCommit = stdout.toString().split("\n")[0].trim();
+    versionTracker {
+        enabled true
+        author "Jared"
+        projectName "TipTheScales"
     }
-    System.out.println("Last version hash: \"" + firstCommit + "\"");
-    stdout = new ByteArrayOutputStream()
-    def test = exec {
-        commandLine 'git', 'log', '--pretty=tformat:- [%s](' + repoLink + '%H) - %aN - %cd', '--max-parents=1', '--date=local', firstCommit + "..@"
-        standardOutput = stdout
+    webhook {
+        enabled true
+        curseId "282313"
+        avatarUrl "https://media.forgecdn.net/avatars/131/501/636467873539016713.png"
     }
-    File file = new File("changelog.md")
-    file.write("### Current version: " + project.version)
-    file.append("\n" + stdout.toString())
-    System.out.println("Changelog generated!")
 }
+
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.16.5-36.0.22'
-
 }
 
 jar {
@@ -142,6 +127,9 @@ artifacts {
     archives javadocJar
     archives deobfJar
 }
+
+publish.dependsOn(project.tasks.getByName("assemble"))
+publish.mustRunAfter(project.tasks.getByName("build"))
 
 publishing {
 
@@ -202,36 +190,4 @@ curseforge {
 //        addArtifact(javadocJar)
         addArtifact(deobfJar)
     }
-}
-
-task updateVersionTracker {
-
-    onlyIf {
-
-        project.hasProperty('versionTrackerAPI')
-    }
-
-    doLast {
-        def body = [
-                'author'        : "${project.findProperty('versionTrackerAuthor')}",
-                'projectName'   : "TipTheScales",
-                'gameVersion'   : "1.16.5",
-                'projectVersion': "${version}",
-                'homepage'      : "${project.findProperty('versionTrackerHomepage')}",
-                'uid'           : "${project.findProperty('versionTrackerKey')}"
-        ]
-
-        // Opens a connection to the version tracker API and writes the payload JSON.
-        def req = new URL(project.findProperty('versionTrackerAPI')).openConnection()
-        req.setRequestMethod('POST')
-        req.setRequestProperty('Content-Type', 'application/json; charset=UTF-8')
-        req.setRequestProperty('User-Agent', "TipTheScales Tracker Gradle")
-        req.setDoOutput(true)
-        req.getOutputStream().write(JsonOutput.toJson(body).getBytes("UTF-8"))
-
-        // We need to attempt a read in order to actually send the message.
-        println "VersionCheck Status code: ${req.getResponseCode()}"
-        println "VersionCheck Response: ${req.getInputStream().getText()}"
-    }
-
 }
