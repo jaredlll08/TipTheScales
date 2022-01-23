@@ -1,14 +1,19 @@
+import com.blamejared.modtemplate.Utils
+
 plugins {
     java
     `maven-publish`
+    id("com.blamejared.modtemplate")
     id("org.spongepowered.gradle.vanilla") version "0.2.1-SNAPSHOT"
 }
 
 val minecraftVersion: String by project
 val modName: String by project
 val modId: String by project
+val modVersion: String by project
 
 val baseArchiveName = "${modName}-common-${minecraftVersion}"
+version = Utils.updatingSemVersion(modVersion)
 
 base {
     archivesName.set(baseArchiveName)
