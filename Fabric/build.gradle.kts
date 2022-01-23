@@ -12,7 +12,6 @@ plugins {
 val modVersion: String by project
 val minecraftVersion: String by project
 val fabricLoaderVersion: String by project
-val fabricVersion: String by project
 val modName: String by project
 val modAuthor: String by project
 val modId: String by project
