@@ -1,61 +1,26 @@
-/bin/
-# Forge
-/LICENSE-fml.txt
-/MinecraftForge-Credits.txt
-/MinecraftForge-License.txt
-/README.txt
-/CREDITS-fml.txt
-/forge-1.7.2*
-/logs/*
-/config/*
-/configs/*
-/asm/*
-/saves/*
-/usernamecache.json
-/options.txt
-/minetweaker.log
-/BotaniaVars.dat
-/.analytics/*
-/crash-reports/
-/scripts/*
-
-/bin/*
-
-# Modproject
-/src/api/resources/*
-/mods/*
-
-# Gradle
-/.gradle
-/build
-/classes/
-# Eclipse
-/.classpath
-/.project
-/.settings
-/bin
-/eclipse/*
-/.metadata
+# eclipse
+bin
 *.launch
+.settings
+.metadata
+.classpath
+.project
 
-# IntelliJ IDEA
-/*.iml
-/*.ipr
-/*.iws
-/.idea
-/out
+# idea
+out
+*.ipr
+*.iws
+*.iml
+.idea/*
+!.idea/scopes
 
-# Debugging
-/run
-
-# OS X
-.DS_Store
+# gradle
+build
+.gradle
 
 # other
-/.nb-gradle/private/
-/common
-
+eclipse
+run
 
 secrets.json
-
 changelog.md

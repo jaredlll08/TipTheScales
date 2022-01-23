@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.blamejared.tipthescales.mixin",
+  "compatibilityLevel": "JAVA_16",
+  "client": [
+    "MixinVideoSettingsScreen",
+    "OptionAccessor",
+    "VideoSettingsScreenAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "refmap": "${refmap_target}refmap.json"
+}

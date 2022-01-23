@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "tipthescales",
+  "version": "${version}",
+  "name": "Tip The Scales",
+  "description": "Allows for more control when adjusting the GUI size.",
+  "authors": [
+    "Jaredlll08"
+  ],
+  "contact": {
+    "homepage": "https://minecraft.curseforge.com/projects/tiptthescales",
+    "sources": "https://github.com/jaredlll08/tipthescales"
+  },
+  "license": "MIT",
+  "icon": "assets/tipthescales/icon.png",
+  "environment": "*",
+  "mixins": [
+    "tipthescales.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.12",
+    "minecraft": "1.17.x",
+    "java": ">=16"
+  }
+}
