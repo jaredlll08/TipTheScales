@@ -33,6 +33,7 @@ minecraft {
 
 dependencies {
     compileOnly("org.spongepowered:mixin:0.8.5")
+    compileOnly("org.ow2.asm:asm-tree:9.2")
 }
 
 tasks.processResources {
