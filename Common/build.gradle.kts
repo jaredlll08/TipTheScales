@@ -13,7 +13,7 @@ val modId: String by project
 val modVersion: String by project
 
 val baseArchiveName = "${modName}-common-${minecraftVersion}"
-version = Utils.updatingSemVersion(modVersion)
+version = Utils.updatingVersion(modVersion)
 
 base {
     archivesName.set(baseArchiveName)

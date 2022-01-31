@@ -19,7 +19,7 @@ plugins {
     id("com.blamejared.modtemplate") version ("3.0.0.37")
 }
 
-version = Utils.updatingSemVersion(modVersion)
+version = Utils.updatingVersion(modVersion)
 
 allprojects {
     repositories {

@@ -24,7 +24,7 @@ val modJavaVersion: String by project
 
 val baseArchiveName = "${modName}-fabric-${minecraftVersion}"
 
-version = Utils.updatingSemVersion(modVersion)
+version = Utils.updatingVersion(modVersion)
 base {
     archivesName.set(baseArchiveName)
 }
