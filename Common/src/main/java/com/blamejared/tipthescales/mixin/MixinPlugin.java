@@ -15,7 +15,7 @@ public class MixinPlugin implements IMixinConfigPlugin {
     public void onLoad(String mixinPackage) {
         
         try {
-            Class.forName("net.optifine.Config");
+            Class.forName("net.optifine.Config", false, MixinPlugin.class.getClassLoader());
             optifineLoaded = true;
         } catch(Exception ignored) {
         }
