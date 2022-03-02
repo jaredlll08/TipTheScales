@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[39,)"
+loaderVersion = "[40,)"
 license = "MIT"
 [[mods]]
 modId = "tipthescales"
@@ -7,7 +7,7 @@ version = "${file.jarVersion}"
 displayName = "TipTheScales"
 authors = "Jaredlll08"
 logoFile="icon.png"
-updateJSONURL = "https://updates.blamejared.com/get?n=TipTheScales&gv=1.18.1"
+updateJSONURL = "https://updates.blamejared.com/get?n=TipTheScales&gv=1.18.2"
 description = '''
 Allows for more control when adjusting the GUI size.
 '''
