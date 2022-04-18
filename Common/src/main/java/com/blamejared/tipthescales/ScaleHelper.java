@@ -6,9 +6,12 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 
 public class ScaleHelper {
+    
     public static int guiScale;
     
     public static Component genericValueLabel(Option option, Component args) {
-        return new TranslatableComponent("options.generic_value", ((OptionAccessor)option).getCaption(), args);
+        
+        return new TranslatableComponent("options.generic_value", ((OptionAccessor) option).tipTheScales$getCaption(), args);
     }
+    
 }

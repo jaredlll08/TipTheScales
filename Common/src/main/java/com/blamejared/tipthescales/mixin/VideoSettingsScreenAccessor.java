@@ -8,8 +8,8 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(VideoSettingsScreen.class)
 public interface VideoSettingsScreenAccessor {
     
-    @Accessor
-    static Option[] getOPTIONS() {
+    @Accessor("OPTIONS")
+    static Option[] tipTheScales$getOPTIONS() {
         
         throw new UnsupportedOperationException();
     }

@@ -24,9 +24,9 @@ public class MixinVideoSettingsScreen extends OptionsSubScreen {
     }
     
     @Inject(method = "init", at = @At("HEAD"))
-    public void init(CallbackInfo ci) {
+    public void tipTheScales$init(CallbackInfo ci) {
         
-        Option[] options = VideoSettingsScreenAccessor.getOPTIONS();
+        Option[] options = VideoSettingsScreenAccessor.tipTheScales$getOPTIONS();
         for(int i = 0; i < options.length; i++) {
             Option option = options[i];
             if(option.equals(Option.GUI_SCALE)) {
@@ -34,8 +34,8 @@ public class MixinVideoSettingsScreen extends OptionsSubScreen {
                 CycleOption<Integer> cycleOption = (CycleOption<Integer>) option;
                 OptionAccessor accessOption = (OptionAccessor) cycleOption;
                 
-                String captionKey = accessOption.getCaption().getContents();
-                if(accessOption.getCaption() instanceof TranslatableComponent transComp) {
+                String captionKey = accessOption.tipTheScales$getCaption().getContents();
+                if(accessOption.tipTheScales$getCaption() instanceof TranslatableComponent transComp) {
                     captionKey = transComp.getKey();
                 }
                 
@@ -55,18 +55,18 @@ public class MixinVideoSettingsScreen extends OptionsSubScreen {
     }
     
     @Inject(method = "mouseClicked", at = @At(value = "HEAD"))
-    public void mouseClickedHead(double mouseX, double mouseY, int button, CallbackInfoReturnable<Boolean> cir) {
+    public void tipTheScales$mouseClickedHead(double mouseX, double mouseY, int button, CallbackInfoReturnable<Boolean> cir) {
         
         ScaleHelper.guiScale = this.options.guiScale;
     }
     
     
     @Redirect(method = "mouseClicked", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;resizeDisplay()V"))
-    public void mouseClickedResize(Minecraft instance) {}
+    public void tipTheScales$mouseClickedResize(Minecraft instance) {}
     
     
     @Inject(method = "mouseReleased", at = @At(value = "HEAD"))
-    public void mouseReleasedHead(double mouseX, double mouseY, int button, CallbackInfoReturnable<Boolean> cir) {
+    public void tipTheScales$mouseReleasedHead(double mouseX, double mouseY, int button, CallbackInfoReturnable<Boolean> cir) {
         
         if(this.options.guiScale != ScaleHelper.guiScale) {
             this.minecraft.resizeDisplay();
@@ -75,7 +75,7 @@ public class MixinVideoSettingsScreen extends OptionsSubScreen {
     }
     
     @Redirect(method = "mouseReleased", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;resizeDisplay()V"))
-    public void mouseReleasedResize(Minecraft instance) {}
+    public void tipTheScales$mouseReleasedResize(Minecraft instance) {}
     
     
 }
