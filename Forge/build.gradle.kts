@@ -45,7 +45,7 @@ mixin {
 
 minecraft {
     mappings("official", minecraftVersion)
-
+    accessTransformer(file("src/main/resources/META-INF/accesstransformer.cfg"))
     runs {
         create("client") {
             workingDirectory(project.file("run"))

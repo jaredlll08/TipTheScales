@@ -4,7 +4,7 @@ import net.darkhax.curseforgegradle.Constants as CFG_Constants
 
 plugins {
     `maven-publish`
-    id("fabric-loom") version "0.10-SNAPSHOT"
+    id("fabric-loom") version "0.12-SNAPSHOT"
     id("com.blamejared.modtemplate")
     id("net.darkhax.curseforgegradle") version ("1.0.8")
 }
@@ -37,6 +37,7 @@ dependencies {
 }
 
 loom {
+    accessWidenerPath.set(project(":Common").file("src/main/resources/${modId}.accesswidener"))
     runs {
         named("client") {
             client()

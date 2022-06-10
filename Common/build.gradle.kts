@@ -21,6 +21,7 @@ base {
 
 minecraft {
     version(minecraftVersion)
+    accessWideners(project.file("src/main/resources/${modId}.accesswidener"))
     runs {
         client("vanilla_client") {
             workingDirectory(project.file("run"))

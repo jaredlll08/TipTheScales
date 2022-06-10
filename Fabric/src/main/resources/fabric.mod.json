@@ -11,6 +11,8 @@
     "homepage": "https://minecraft.curseforge.com/projects/tiptthescales",
     "sources": "https://github.com/jaredlll08/tipthescales"
   },
+  "entrypoints": {
+  },
   "license": "MIT",
   "icon": "assets/tipthescales/icon.png",
   "environment": "*",
@@ -18,8 +20,8 @@
     "tipthescales.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.13",
-    "minecraft": "1.18.x",
+    "fabricloader": ">=0.14",
+    "minecraft": "1.19.x",
     "java": ">=17"
   }
 }

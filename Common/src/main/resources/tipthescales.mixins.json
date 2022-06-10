@@ -5,12 +5,14 @@
   "compatibilityLevel": "JAVA_17",
   "plugin": "com.blamejared.tipthescales.mixin.MixinPlugin",
   "client": [
-    "MixinVideoSettingsScreen",
-    "OptionAccessor",
-    "VideoSettingsScreenAccessor"
+    "MixinMinecraft",
+    "MixinVideoSettingsScreen"
   ],
   "injectors": {
     "defaultRequire": 1
   },
-  "refmap": "${refmap_target}refmap.json"
+  "refmap": "${refmap_target}refmap.json",
+  "mixins": [
+    "AccessOptions"
+  ]
 }
