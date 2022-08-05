@@ -2,4 +2,3 @@ accessWidener   v1      named
 accessible      class   net/minecraft/client/OptionInstance$ValueSet
 accessible      class   net/minecraft/client/OptionInstance$IntRangeBase
 accessible      class   net/minecraft/client/OptionInstance$SliderableOrCyclableValueSet
-
