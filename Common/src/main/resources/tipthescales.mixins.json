@@ -5,7 +5,8 @@
   "compatibilityLevel": "JAVA_17",
   "plugin": "com.blamejared.tipthescales.mixin.MixinPlugin",
   "client": [
-    "MixinMinecraft",
+    "MixinClampingLazyMaxIntRange",
+    "MixinOptions",
     "MixinVideoSettingsScreen"
   ],
   "injectors": {
