@@ -35,16 +35,16 @@ public class MixinVideoSettingsScreen extends OptionsSubScreen {
     @Redirect(method = "mouseClicked", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;resizeDisplay()V"))
     public void tipTheScales$mouseClickedResize(Minecraft instance) {}
     
-    @Inject(method = "mouseReleased", at = @At(value = "HEAD"))
-    public void tipTheScales$mouseReleasedHead(double mouseX, double mouseY, int button, CallbackInfoReturnable<Boolean> cir) {
-        
+    
+    // This feels horrible, but I am not sure how better to do it, and I don't *think* other mods will do this, I hope anyway, future me will deal with it
+    @Override
+    public boolean mouseReleased(double $$0, double $$1, int $$2) {
+    
         if(this.options.guiScale().get() != tipthescales$cachedGuiScale) {
             Objects.requireNonNull(this.minecraft).resizeDisplay();
         }
         tipthescales$cachedGuiScale = this.options.guiScale().get();
+        return super.mouseReleased($$0, $$1, $$2);
     }
-    
-    @Redirect(method = "mouseReleased", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;resizeDisplay()V"))
-    public void tipTheScales$mouseReleasedResize(Minecraft instance) {}
     
 }

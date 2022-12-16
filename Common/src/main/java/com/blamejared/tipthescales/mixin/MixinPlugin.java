@@ -1,7 +1,5 @@
 package com.blamejared.tipthescales.mixin;
 
-import com.mojang.math.Vector3d;
-import com.mojang.math.Vector3f;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
