@@ -1,11 +1,8 @@
 package com.blamejared.tipthescales.mixin;
 
-import org.objectweb.asm.tree.ClassNode;
-import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
-import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
+import org.spongepowered.asm.mixin.extensibility.*;
 
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class MixinPlugin implements IMixinConfigPlugin {
     
@@ -45,12 +42,12 @@ public class MixinPlugin implements IMixinConfigPlugin {
     }
     
     @Override
-    public void postApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
+    public void postApply(String targetClassName, org.objectweb.asm.tree.ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
     
     }
     
     @Override
-    public void preApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
+    public void preApply(String targetClassName, org.objectweb.asm.tree.ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
     
     }
     
