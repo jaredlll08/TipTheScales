@@ -8,6 +8,6 @@ object Properties {
     const val AVATAR = "https://media.forgecdn.net/avatars/131/501/636467873539016713.png"
     const val CURSE_PROJECT_ID = "282313"
     const val CURSE_HOMEPAGE = "https://www.curseforge.com/minecraft/mc-mods/tipthescales"
-    const val FIRST_COMMIT = "c70c520517fba17e191206e43cc3a1ac468d3247"
+    const val FIRST_COMMIT = "4d7198a34bf524373e47276cc19a950cb026ccd7"
     const val GIT_REPO = "https://github.com/jaredlll08/TipTheScales"
 }
