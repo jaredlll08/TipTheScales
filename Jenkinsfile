@@ -26,11 +26,6 @@ pipeline {
                 sh './gradlew build'
             }
         }
-        stage('Git Changelog') {
-            steps {
-                sh './gradlew genGitChangelog'
-            }
-        }
 
         stage('Publish') {
             steps {
