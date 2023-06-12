@@ -1,4 +1,4 @@
-import com.blamejared.modtemplate.Utils
+import com.blamejared.gradle.mod.utils.GMUtils
 import com.blamejared.tipthescales.gradle.Properties
 import com.blamejared.tipthescales.gradle.Versions
 import com.diluv.schoomp.Webhook
@@ -11,7 +11,7 @@ plugins {
     `java-library`
 }
 
-version = Utils.updatingVersion(Versions.MOD)
+version = GMUtils.updatingVersion(Versions.MOD)
 
 tasks.create("postDiscord") {
 
@@ -19,7 +19,7 @@ tasks.create("postDiscord") {
         try {
 
             // Create a new webhook instance for Discord
-            val webhook = Webhook(Utils.locateProperty(project, "discordCFWebhook"), "${Properties.NAME} CurseForge Gradle Upload")
+            val webhook = Webhook(GMUtils.locateProperty(project, "discordCFWebhook"), "${Properties.NAME} CurseForge Gradle Upload")
 
             // Craft a message to send to Discord using the webhook.
             val message = Message()
@@ -49,7 +49,7 @@ tasks.create("postDiscord") {
                 embed.addField("Download", downloadString, false)
             }
 
-            embed.addField("Changelog", Utils.getCIChangelog(project, Properties.GIT_REPO).take(1000), false)
+            embed.addField("Changelog", GMUtils.smallChangelog(project, Properties.GIT_REPO).take(1000), false)
 
             embed.color = 0xF16436
             message.addEmbed(embed)

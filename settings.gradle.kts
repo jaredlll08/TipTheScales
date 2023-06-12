@@ -14,15 +14,10 @@ pluginManagement {
             name = "BlameJared"
         }
     }
-    resolutionStrategy {
-        eachPlugin {
-            if (requested.id.id == "org.spongepowered.mixin") {
-                useModule("org.spongepowered:mixingradle:${requested.version}")
-            }
-        }
-    }
 }
-
+plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention") version "0.5.0"
+}
 rootProject.name = "TipTheScales"
 include("common")
 include("fabric")
