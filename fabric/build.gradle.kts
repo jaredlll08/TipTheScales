@@ -13,10 +13,7 @@ plugins {
 
 dependencies {
     minecraft("com.mojang:minecraft:${Versions.MINECRAFT}")
-    mappings(loom.layered {
-        officialMojangMappings()
-        parchment("org.parchmentmc.data:parchment-1.18.1:2021.12.19@zip")
-    })
+    mappings(loom.officialMojangMappings())
     modImplementation("net.fabricmc:fabric-loader:${Versions.FABRIC_LOADER}")
     modImplementation("net.fabricmc.fabric-api:fabric-api:${Versions.FABRIC}")
     implementation(project(":common"))
@@ -35,11 +32,12 @@ loom {
 }
 
 tasks.create<TaskPublishCurseForge>("publishCurseForge") {
+    dependsOn(tasks.remapJar)
     apiToken = GMUtils.locateProperty(project, "curseforgeApiToken")
 
-    val mainFile = upload(Properties.CURSE_PROJECT_ID, file("${project.buildDir}/libs/${base.archivesName.get()}-$version.jar"))
+    val mainFile = upload(Properties.CURSE_PROJECT_ID, tasks.remapJar.get().archiveFile)
     mainFile.changelogType = "markdown"
-    mainFile.changelog =  GMUtils.smallChangelog(project, Properties.GIT_REPO)
+    mainFile.changelog = GMUtils.smallChangelog(project, Properties.GIT_REPO)
     mainFile.releaseType = CFG_Constants.RELEASE_TYPE_RELEASE
     mainFile.addJavaVersion("Java ${Versions.JAVA}")
     mainFile.addGameVersion(Versions.MINECRAFT)
@@ -61,3 +59,4 @@ modrinth {
         required.project("fabric-api")
     }
 }
+tasks.modrinth.get().dependsOn(tasks.remapJar)
