@@ -9,11 +9,6 @@ plugins {
 minecraft {
     version(Versions.MINECRAFT)
     accessWideners(project.file("src/main/resources/${Properties.MODID}.accesswidener"))
-    runs {
-        client("Common Client") {
-            workingDirectory(project.file("run"))
-        }
-    }
 }
 
 dependencies {
