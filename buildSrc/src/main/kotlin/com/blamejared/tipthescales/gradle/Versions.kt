@@ -1,7 +1,7 @@
 package com.blamejared.tipthescales.gradle
 
 object Versions {
-    const val MOD = "11.0.0"
+    const val MOD = "12.0.0"
     const val JAVA = "17"
     const val MINECRAFT = "1.20.4"
     const val FABRIC_LOADER = "0.15.3"
