@@ -10,8 +10,6 @@ public class TipTheScalesNeoForge {
     
     public TipTheScalesNeoForge() {
         
-        ModLoadingContext.get()
-                .registerExtensionPoint(IExtensionPoint.DisplayTest.class, () -> new IExtensionPoint.DisplayTest(() -> IExtensionPoint.DisplayTest.IGNORESERVERONLY, (remote, isServer) -> true));
     }
     
 }

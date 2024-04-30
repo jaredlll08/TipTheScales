@@ -46,10 +46,6 @@ class DefaultPlugin : Plugin<Project> {
         project.version = GMUtils.updatingVersion(Versions.MOD)
         project.group = Properties.GROUP
 
-        project.tasks.withType<GenerateModuleMetadata>().all {
-            enabled = false
-        }
-
         project.repositories {
             this.add(this.maven("https://repo.spongepowered.org/repository/maven-public/") {
                 name = "Sponge"
@@ -68,7 +64,7 @@ class DefaultPlugin : Plugin<Project> {
         project.plugins.apply(JavaLibraryPlugin::class.java)
 
         with(project.extensions.getByType(JavaPluginExtension::class.java)) {
-            toolchain.languageVersion.set(JavaLanguageVersion.of(JavaVersion.VERSION_17.majorVersion))
+            toolchain.languageVersion.set(JavaLanguageVersion.of(JavaVersion.VERSION_21.majorVersion))
             withSourcesJar()
             withJavadocJar()
             sourceSets {
@@ -127,7 +123,7 @@ class DefaultPlugin : Plugin<Project> {
                         "ITEM_ICON" to Properties.ITEM_ICON,
                 )
                 inputs.properties(properties)
-                filesMatching(setOf("fabric.mod.json", "META-INF/mods.toml", "pack.mcmeta")) {
+                filesMatching(setOf("fabric.mod.json", "META-INF/mods.toml", "META-INF/neoforge.mods.toml", "pack.mcmeta")) {
                     expand(properties)
                 }
             }
@@ -140,8 +136,6 @@ class DefaultPlugin : Plugin<Project> {
                     attributes["Implementation-Title"] = project.name
                     attributes["Implementation-Version"] = archiveVersion
                     attributes["Implementation-Vendor"] = Properties.AUTHOR
-                    attributes["Implementation-Timestamp"] = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").format(Date())
-                    attributes["Timestamp"] = System.currentTimeMillis()
                     attributes["Built-On-Java"] = "${System.getProperty("java.vm.version")} (${System.getProperty("java.vm.vendor")})"
                     attributes["Built-On-Minecraft"] = Versions.MINECRAFT
                 }
