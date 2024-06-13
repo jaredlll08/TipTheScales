@@ -21,6 +21,9 @@ dependencies {
 
 loom {
     accessWidenerPath.set(project(":common").file("src/main/resources/${Properties.MODID}.accesswidener"))
+    mixin {
+        this.defaultRefmapName.set("${Properties.MODID}.refmap.json")
+    }
     runs {
         named("client") {
             client()
