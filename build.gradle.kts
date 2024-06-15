@@ -1,6 +1,6 @@
 import com.blamejared.gradle.mod.utils.GMUtils
-import com.blamejared.tipthescales.gradle.Properties
-import com.blamejared.tipthescales.gradle.Versions
+import com.blamejared.Properties
+import com.blamejared.Versions
 import com.diluv.schoomp.Webhook
 import com.diluv.schoomp.message.Message
 import com.diluv.schoomp.message.embed.Embed

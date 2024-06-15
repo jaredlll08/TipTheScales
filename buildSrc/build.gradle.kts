@@ -17,15 +17,3 @@ dependencies {
     implementation(group = "com.diluv.schoomp", name= "Schoomp", version="1.2.6")
 }
 
-gradlePlugin {
-    plugins {
-        create("default") {
-            id = "com.blamejared.tipthescales.default"
-            implementationClass = "com.blamejared.tipthescales.gradle.DefaultPlugin"
-        }
-        create("loader") {
-            id = "com.blamejared.tipthescales.loader"
-            implementationClass = "com.blamejared.tipthescales.gradle.LoaderPlugin"
-        }
-    }
-}
