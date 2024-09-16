@@ -1,7 +1,8 @@
 modLoader = "javafml"
-loaderVersion = "${FORGE_LOADER}"
+loaderVersion = "*"
 issueTrackerURL = "${GIT_REPO}/issues"
 license = "MIT"
+clientSideOnly = true
 [[mods]]
 modId = "${MODID}"
 updateJSONURL = "https://updates.blamejared.com/get?n=${MODID}&gv=${MINECRAFT}&ml=forge"
@@ -15,7 +16,7 @@ itemIcon = "${ITEM_ICON}"
 [[dependencies.${MODID}]]
 modId = "forge"
 mandatory = true
-versionRange = "${FORGE_LOADER}"
+versionRange = "[${FORGE},)"
 ordering = "NONE"
 side = "BOTH"
 [[dependencies.${MODID}]]
