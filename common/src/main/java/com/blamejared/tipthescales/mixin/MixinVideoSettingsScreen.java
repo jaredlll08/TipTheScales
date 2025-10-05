@@ -4,6 +4,7 @@ import net.minecraft.client.Options;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.options.OptionsSubScreen;
 import net.minecraft.client.gui.screens.options.VideoSettingsScreen;
+import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -25,20 +26,20 @@ public abstract class MixinVideoSettingsScreen extends OptionsSubScreen {
     }
     
     @Inject(method = "mouseClicked", at = @At(value = "HEAD"))
-    public void tipTheScales$mouseClickedHead(double mouseX, double mouseY, int button, CallbackInfoReturnable<Boolean> cir) {
+    public void tipTheScales$mouseClickedHead(MouseButtonEvent event, boolean doubleClick, CallbackInfoReturnable<Boolean> cir) {
         
         tipthescales$cachedGuiScale = this.options.guiScale().get();
     }
     
     // This feels horrible, but I am not sure how better to do it, and I don't *think* other mods will do this, I hope anyway, future me will deal with it
     @Override
-    public boolean mouseReleased(double $$0, double $$1, int $$2) {
+    public boolean mouseReleased(MouseButtonEvent event) {
         
         if(this.options.guiScale().get() != tipthescales$cachedGuiScale) {
             Objects.requireNonNull(this.minecraft).resizeDisplay();
         }
         tipthescales$cachedGuiScale = this.options.guiScale().get();
-        return super.mouseReleased($$0, $$1, $$2);
+        return super.mouseReleased(event);
     }
     
 }
