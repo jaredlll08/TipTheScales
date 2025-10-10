@@ -83,8 +83,6 @@ tasks {
                 "MINECRAFT" to Versions.MINECRAFT,
                 "FABRIC_LOADER" to Versions.FABRIC_LOADER,
                 "FABRIC" to Versions.FABRIC,
-                "FORGE" to Versions.FORGE,
-                "FORGE_LOADER" to Versions.FORGE_LOADER,
                 "NEO_FORGE" to Versions.NEO_FORGE,
                 "NEO_FORGE_LOADER" to Versions.NEO_FORGE_LOADER,
                 "GROUP" to Properties.GROUP,

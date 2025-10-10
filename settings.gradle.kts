@@ -17,5 +17,4 @@ plugins {
 rootProject.name = "TipTheScales"
 include("common")
 include("fabric")
-//include("forge")
 include("neoforge")
