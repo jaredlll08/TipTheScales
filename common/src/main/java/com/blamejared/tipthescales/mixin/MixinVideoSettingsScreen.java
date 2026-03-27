@@ -36,7 +36,7 @@ public abstract class MixinVideoSettingsScreen extends OptionsSubScreen {
     public boolean mouseReleased(MouseButtonEvent event) {
         
         if(this.options.guiScale().get() != tipthescales$cachedGuiScale) {
-            Objects.requireNonNull(this.minecraft).resizeDisplay();
+            Objects.requireNonNull(this.minecraft).resizeGui();;
         }
         tipthescales$cachedGuiScale = this.options.guiScale().get();
         return super.mouseReleased(event);
